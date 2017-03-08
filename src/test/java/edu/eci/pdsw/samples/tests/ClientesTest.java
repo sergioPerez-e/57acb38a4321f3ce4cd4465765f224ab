@@ -16,6 +16,25 @@ import static org.junit.Assert.*;
  */
 public class ClientesTest {
 
+    
+    
+    /*
+    Clases de equivalencia: 
+    precondicion: nueco cliente no puede estar nulo
+    poscondicion: el cliente queda disponible para futuros alquileres
+    
+    
+    #CE |        CE                                           | Tipo          | Resultado 
+    
+    1    p!= null                                               Error               ninguno
+    2    el cliente ya se encuentra 
+         clientes.containsKey(p.getDocumento())==true           Dentro Frontera     No se agrega P
+    3    el cliente no se encuentra 
+         clientes.containsKey(p.getDocumento())==false          Dentro Frontera     Se agrega P
+    4    
+    
+    
+    */
     public ClientesTest() {
     }
     
