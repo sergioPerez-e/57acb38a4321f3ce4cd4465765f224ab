@@ -4,12 +4,49 @@
       xmlns:p="http://primefaces.org/ui" 
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
-    <h:body>
+    <h:body>    
     <br/>
     <b>REGISTRO CLIENTES</b>
+    <h:form>
+        <table id="Tregistro">
+            <tr>
+              <td>Nombre: </td>  
+              <td>
+                  <p:inputText style="width:40px;" id="cant" type="number" required="required" value="#{ClientesBen.cantActual}" placeholder="Nombre"></p:inputText>
+              </td>      
+            </tr>            
+            <tr>
+              <td>Documento: </td>      
+              <td>Campo 1</td>      
+            </tr>
+            <tr>
+              <td>Telefono: </td>      
+              <td>Campo 4</td>      
+            </tr>
+            <tr>
+              <td>Direccion: </td>      
+              <td>Campo 4</td>      
+            </tr>
+            <tr>
+              <td>e-mail: </td>      
+              <td>Campo 1</td>      
+            </tr>
+            <tr>
+              <td>Vetado: </td>      
+              <td>Campo 4</td>      
+            </tr>
+            <tr>
+              <td>Rentados: </td>      
+              <td>Campo 1</td>      
+            </tr>
+            
+        </table>
+    </h:form>
+
+
     <br/>        
     <hr/>
-    <p:dataTable var="Tcliente" value="#{ClientesBen.listaClientes}">
+    <p:dataTable id="listaClientes" var="Tcliente" value="#{ClientesBen.listaClientes}">
         <p:column headerText="Nombre">
             <h:outputText value="#{Tcliente.nombre}" />
         </p:column>
@@ -37,12 +74,12 @@
         <p:column headerText="Rentados">
             <h:outputText value="#{Tcliente.rentado}" />
         </p:column>
+        <p:column>
+            <f:facet name="header">Seleccionar</f:facet>   
+            <p:commandButton value="seleccionar" update=":listaClientes" actionListener="#{ClientesBen.clienteSeleccionado(Tcliente)}" ></p:commandButton>
+        </p:column>
         
     </p:dataTable>
-
-        
-        
-        
   
     </h:body>
 </html>

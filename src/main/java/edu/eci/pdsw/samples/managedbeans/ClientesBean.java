@@ -28,6 +28,7 @@ public class ClientesBean implements Serializable {
     
     public ClientesBean() throws ExcepcionServiciosAlquiler {
         listaClientes = sp.consultarClientes();
+        clienteSeleccionado = null;
     }
     
     
