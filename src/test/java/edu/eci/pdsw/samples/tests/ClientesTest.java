@@ -53,7 +53,7 @@ public class ClientesTest {
         Cliente cl = new Cliente("Antonio Moros",2425,"1234","av suba miranda","mosca@gmail.com");   
         
         boolean exis = false; // si ya existe P: true
-        //if(sev.consultarCliente(1581)==cl) exis = true;
+        if(sev.consultarCliente(1581)==cl) exis = true;
         sev.registrarCliente(cl);    
        
         assertEquals("Se esta creando",sev.consultarCliente(2425)==cl,true);
@@ -65,15 +65,19 @@ public class ClientesTest {
      @Test
     public void CE2Test() throws ExcepcionServiciosAlquiler{
         ServiciosAlquiler sev=ServiciosAlquilerItemsStub.getInstance();        
-        Cliente cl = new Cliente("Antonio Moros",1581,"1234","av suba miranda","mosca@gmail.com");        
-        boolean falla=false;
+        Cliente cl = new Cliente("Antonio Carros",2426,"1234","av caracol","mosca23@gmail.com");  
+        sev.registrarCliente(cl); 
+        boolean falla = false;
+        boolean exis = false; // si ya existe P: true
+        if(sev.consultarCliente(2426)==cl) exis = true;
+        
         try{
             sev.registrarCliente(cl); 
-        }catch(ExcepcionServiciosAlquiler e){            
+        }catch(ExcepcionServiciosAlquiler e){           
             falla=true;
         }
-        //assertEquals("Se esta creando",falla,false);
-        //assertEquals("No es consultable al no existir",sev.consultarCliente(1581)!=cl, true);   	
+        assertEquals("No se egrega",falla,true);
+        assertEquals("Ya esta regsitrado",exis, true);   	
     }
     
     
@@ -85,8 +89,7 @@ public class ClientesTest {
         try{
             sev.registrarCliente(cl);             
            
-        }catch(ExcepcionServiciosAlquiler e){
-            //prueba: 0 dias de préstamo
+        }catch(ExcepcionServiciosAlquiler e){           
             falla=true;
         }
         assertEquals("No es adicionado un cliente nulo",falla,false);           	
