@@ -29,13 +29,12 @@ public class AlquilerItemsBean implements Serializable {
     ServiciosAlquiler sp;
     private Map<Integer,ItemRentado> ItemsRentados;
     private ArrayList<String[]> listaPendientes;
-    private Cliente clienteSelected;
-    //@ManagedProperty(value = "#{ClientesBen}")
-    //private ClientesBean cb;
+    
+    @ManagedProperty(value = "#{ClientesBen}")
+    private ClientesBean cb;
 
     public AlquilerItemsBean() {
         sp = ServiciosAlquiler.getInstance();
-        //clienteSelected=cb.getClienteSeleccionado();
         ItemsRentados= new HashMap<>();
     }
 
@@ -61,5 +60,12 @@ public class AlquilerItemsBean implements Serializable {
         }
         return listaPendientes;
     }
-    
+
+    public ClientesBean getCb() {
+        return cb;
+    }
+
+    public void setCb(ClientesBean cb) {
+        this.cb = cb;
+    }
 }
