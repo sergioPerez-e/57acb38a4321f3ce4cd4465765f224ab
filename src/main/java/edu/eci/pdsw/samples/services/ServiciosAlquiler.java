@@ -63,9 +63,9 @@ public abstract class ServiciosAlquiler {
     public abstract List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler;
 
     /**
-     * @obj rejistrar el alkiler de un item
+     * @obj Registrar el alquiler de un item
      * @pre numdias >=1
-     * @param date fecha de rejistro del alquiler
+     * @param date fecha de registro del alquiler
      * @param docu identificacion de a quien se le cargara el alquiler
      * @param item el identificador del item a alquilar
      * @param numdias el numero de dias que se le prestara el item
