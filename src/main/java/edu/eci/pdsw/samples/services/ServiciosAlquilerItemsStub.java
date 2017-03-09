@@ -131,8 +131,10 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
     
     @Override
     public void registrarAlquilerCliente(Date date,long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-        
+        if(numdias<=0)throw new ExcepcionServiciosAlquiler("No dias de prestamo menores a cero ");
+        LocalDate ldNow=LocalDate.now();
         LocalDate ld=date.toLocalDate();
+        if(ldNow.isAfter(ld))throw new ExcepcionServiciosAlquiler("La fecha del pedido no puede ser menor a hoy");
         LocalDate ld2=ld.plusDays(numdias);
         
         ItemRentado ir=new ItemRentado(item,date,java.sql.Date.valueOf(ld2));
@@ -182,15 +184,16 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
     
     @Override
     public long consultarMultaAlquiler(int iditem,Date fechaDevolucion) throws ExcepcionServiciosAlquiler{
+
         if (!itemsrentados.containsKey(iditem)){
             throw new ExcepcionServiciosAlquiler("El item "+iditem+"no esta en alquiler");
         }
         else{
             ItemRentado ir=itemsrentados.get(iditem);
-            
-            LocalDate fechaMinimaEntrega=ir.getFechafinrenta().toLocalDate();
             LocalDate fechaEntrega=fechaDevolucion.toLocalDate();
-            long diasRetraso = ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega);
+            if(fechaEntrega.isBefore(ir.getFechainiciorenta().toLocalDate()))throw new ExcepcionServiciosAlquiler("La fecha de devolución no puede ser menor a la del alquiler");
+            LocalDate fechaMinimaEntrega=ir.getFechafinrenta().toLocalDate();
+            long diasRetraso = Math.max(0,ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega));
             return diasRetraso*MULTA_DIARIA;
         }
     }
