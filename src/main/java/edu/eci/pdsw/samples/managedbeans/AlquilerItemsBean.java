@@ -48,7 +48,7 @@ public class AlquilerItemsBean implements Serializable {
         LocalDate fechaInicial=null;
         LocalDate fechaEntrega=null;
         long diasRestantes=0;
-        
+        Map<Integer,ItemRentado> ItemsRentados= new HashMap<>();
         listaPendientes=new ArrayList<String[]>();
         for(int i=0;i<ItemsRentados.size();i++){
             itemTMP=ItemsRentados.get(i);
