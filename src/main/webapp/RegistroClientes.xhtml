@@ -20,25 +20,25 @@
             <tr>
               <td>Documento: </td>      
               <td>
-                   <p:inputText style="width:400px;" id="doc" type="number" required="required" value="#{ClientesBen.documento}" placeholder="Nombre"></p:inputText>
+                   <p:inputText style="width:400px;" id="doc" type="number" required="required" value="#{ClientesBen.documento}" placeholder="documento"></p:inputText>
               </td>      
             </tr>
             <tr>
               <td>Telefono: </td>      
               <td>
-                   <p:inputText style="width:430px;" id="tel" type="text" required="required" value="#{ClientesBen.telefono}" placeholder="Nombre"></p:inputText>
+                   <p:inputText style="width:430px;" id="tel" type="text" required="required" value="#{ClientesBen.telefono}" placeholder="telefono"></p:inputText>
               </td>      
             </tr>
             <tr>
               <td>Direccion: </td>      
               <td>
-                   <p:inputText style="width:430px;" id="dir" type="text" required="required" value="#{ClientesBen.direccion}" placeholder="Nombre"></p:inputText>
+                   <p:inputText style="width:430px;" id="dir" type="text" required="required" value="#{ClientesBen.direccion}" placeholder="direccion"></p:inputText>
               </td>      
             </tr>
             <tr>
               <td>e-mail: </td>      
               <td>
-                   <p:inputText style="width:430px;" id="ema" type="text" required="required" value="#{ClientesBen.email}" placeholder="Nombre"></p:inputText>
+                   <p:inputText style="width:430px;" id="ema" type="text" required="required" value="#{ClientesBen.email}" placeholder="email"></p:inputText>
               </td>      
             </tr> 
         </table>
@@ -78,10 +78,12 @@
         </p:column>        
         
         <p:column>
-            <f:facet name="header">Seleccionar</f:facet>   
-            <p:commandButton value="seleccionar" update=":listaClientes" actionListener="#{ClientesBen.clienteSeleccionado(Tcliente)}" ></p:commandButton>
-        </p:column>
-        
+            <p:commandButton value="Seleccionar"  action = "RegistroClienteItem">
+                
+                <f:setPropertyActionListener value="#{Tcliente}" 
+                    target="#{ClientesBen.clienteSeleccionado}" />
+            </p:commandButton>
+        </p:column> 
     </p:dataTable>
   
     </h:body>

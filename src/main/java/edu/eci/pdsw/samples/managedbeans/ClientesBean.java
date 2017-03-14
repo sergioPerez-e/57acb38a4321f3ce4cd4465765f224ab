@@ -40,10 +40,9 @@ public class ClientesBean implements Serializable {
     
     
     public List<Cliente> getListaClientes() throws ExcepcionServiciosAlquiler {
-        listaClientes = sp.consultarClientes();
-        clean();
-        Collections.reverse(listaClientes);
-        
+        listaClientes = sp.consultarClientes();   
+        List<Cliente> lista = listaClientes;
+        //Collections.reverse(lista);        
         return listaClientes;
     }
 
@@ -58,9 +57,6 @@ public class ClientesBean implements Serializable {
     }
 
     public void setClienteSeleccionado(Cliente clienteSeleccionado) {
-        boolean ccc=false;
-        if(clienteSeleccionado != null)ccc=true;
-        System.out.println(ccc);
         this.clienteSeleccionado = clienteSeleccionado;
     }
 
