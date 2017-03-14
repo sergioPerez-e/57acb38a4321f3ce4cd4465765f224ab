@@ -12,8 +12,8 @@
         <hr/>
         <h:form id="formulario_enviar">
             Ingrese por favor la película que desea alquilar<br/><br/>
-            <p:inputText id="id_pelicula" value="#{AlquilerItems.id_pelicula}" ></p:inputText><br/>
-            <p:inputText id="dias" value="#{AlquilerItems.dias}" ></p:inputText><br/>
+            id Pelicula:<p:inputText id="id_pelicula" value="#{AlquilerItems.id_pelicula}" ></p:inputText><br/>
+            Días:<p:inputText id="dias" value="#{AlquilerItems.dias}" ></p:inputText><br/>
             <p:commandButton value="enviar numero" onclick="#{formulario_enviar.guardarAlquiler()}" update="formulario_enviar"></p:commandButton><br/><br/>
         </h:form>
         <hr/>
@@ -24,6 +24,9 @@
             </p:column>
             <p:column headerText="Dias Restantes">
                 <h:outputText value="#{peli[1]}" />
+            </p:column>
+            <p:column headerText="Valor a pagar">
+                <h:outputText value="#{peli[2]}" />
             </p:column>
         </p:dataTable>
     </h:body>

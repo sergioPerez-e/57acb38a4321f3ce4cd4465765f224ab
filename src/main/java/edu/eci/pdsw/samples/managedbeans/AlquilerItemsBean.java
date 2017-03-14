@@ -9,6 +9,7 @@ import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -47,7 +48,7 @@ public class AlquilerItemsBean implements Serializable {
         sp.registrarAlquilerCliente(java.sql.Date.valueOf(timeStamp), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);        
     }
     
-    public ArrayList<String[]> getListaPendientes() {
+    public ArrayList<String[]> getListaPendientes() throws ExcepcionServiciosAlquiler {
         ItemRentado itemTMP=null;
         LocalDate fechaInicial=null;
         LocalDate fechaEntrega=null;
@@ -63,7 +64,7 @@ public class AlquilerItemsBean implements Serializable {
             fechaEntrega=itemTMP.getFechafinrenta().toLocalDate();
             diasRestantes=ChronoUnit.DAYS.between(fechaInicial, fechaEntrega);
             
-            String[] tmp={itemTMP.getItem().getNombre(),Integer.toString((int) diasRestantes)};
+            String[] tmp={itemTMP.getItem().getNombre(),Integer.toString((int) diasRestantes),Integer.toString((int) sp.consultarMultaAlquiler(itemTMP.getItem().getId(),(Date) Calendar.getInstance().getTime()))};
             listaPendientes.add(tmp);
         }
         return listaPendientes;
