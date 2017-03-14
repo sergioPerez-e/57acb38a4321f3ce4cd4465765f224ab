@@ -15,7 +15,7 @@ import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author 2095112
+ * @author ----
  */
 @ManagedBean(name = "ClientesBen")
 @SessionScoped
@@ -24,6 +24,12 @@ public class ClientesBean implements Serializable {
     ServiciosAlquiler sp = ServiciosAlquiler.getInstance();
     private Cliente clienteSeleccionado;
     private List<Cliente> listaClientes;
+    private String nombre;
+    private long documento;
+    private String telefono;
+    private String direccion;
+    private String email;
+    
 
     
     public ClientesBean() throws ExcepcionServiciosAlquiler {
@@ -49,4 +55,57 @@ public class ClientesBean implements Serializable {
     public void setClienteSeleccionado(Cliente clienteSeleccionado) {
         this.clienteSeleccionado = clienteSeleccionado;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(long documento) {
+        this.documento = documento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
+    
+    
+    public void registrarCliente() throws ExcepcionServiciosAlquiler {
+        Cliente cliente = new Cliente(nombre, documento, telefono, direccion, email);
+        sp.registrarCliente(cliente);
+    }
+    
+
+    
+    
+    
 }

@@ -7,41 +7,47 @@
     <h:body>    
     <br/>
     <b>REGISTRO CLIENTES</b>
-    <h:form>
-        <table id="Tregistro">
+    <br/>
+    <br/>
+    <h:form id="Tregistro">
+        <table >
             <tr>
               <td>Nombre: </td>  
               <td>
-                  <p:inputText style="width:40px;" id="cant" type="number" required="required" value="#{ClientesBen.cantActual}" placeholder="Nombre"></p:inputText>
+                  <p:inputText style="width:430px;" id="nom" type="text" required="required" value="#{ClientesBen.nombre}" placeholder="Nombre"></p:inputText>
               </td>      
             </tr>            
             <tr>
               <td>Documento: </td>      
-              <td>Campo 1</td>      
+              <td>
+                   <p:inputText style="width:400px;" id="doc" type="number" required="required" value="#{ClientesBen.documento}" placeholder="Nombre"></p:inputText>
+              </td>      
             </tr>
             <tr>
               <td>Telefono: </td>      
-              <td>Campo 4</td>      
+              <td>
+                   <p:inputText style="width:430px;" id="tel" type="text" required="required" value="#{ClientesBen.telefono}" placeholder="Nombre"></p:inputText>
+              </td>      
             </tr>
             <tr>
               <td>Direccion: </td>      
-              <td>Campo 4</td>      
+              <td>
+                   <p:inputText style="width:430px;" id="dir" type="text" required="required" value="#{ClientesBen.direccion}" placeholder="Nombre"></p:inputText>
+              </td>      
             </tr>
             <tr>
               <td>e-mail: </td>      
-              <td>Campo 1</td>      
-            </tr>
-            <tr>
-              <td>Vetado: </td>      
-              <td>Campo 4</td>      
-            </tr>
-            <tr>
-              <td>Rentados: </td>      
-              <td>Campo 1</td>      
-            </tr>
-            
+              <td>
+                   <p:inputText style="width:430px;" id="ema" type="text" required="required" value="#{ClientesBen.email}" placeholder="Nombre"></p:inputText>
+              </td>      
+            </tr> 
         </table>
     </h:form>
+    <br/><br/>
+    <h:form>
+        <p:commandButton value="Registrar..." update=":listaClientes,:Tregistro" actionListener="#{ClientesBen.registrarCliente()}" ></p:commandButton>       
+    </h:form>
+    <br/><br/>
 
 
     <br/>        
@@ -69,11 +75,8 @@
         
         <p:column headerText="Vetado">
             <h:outputText value="#{Tcliente.vetado}" />
-        </p:column>
+        </p:column>        
         
-        <p:column headerText="Rentados">
-            <h:outputText value="#{Tcliente.rentado}" />
-        </p:column>
         <p:column>
             <f:facet name="header">Seleccionar</f:facet>   
             <p:commandButton value="seleccionar" update=":listaClientes" actionListener="#{ClientesBen.clienteSeleccionado(Tcliente)}" ></p:commandButton>
