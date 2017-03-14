@@ -5,13 +5,15 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
-import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.ItemRentado;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -30,6 +32,7 @@ public class AlquilerItemsBean implements Serializable {
     private Map<Integer,Map<Integer,ItemRentado>> CliItemsRentados;//idCliente -> idPeli -> ItemRentado
     private ArrayList<String[]> listaPendientes;
     private int id_pelicula;
+    private int dias;
     
     @ManagedProperty(value = "#{ClientesBen}")
     private ClientesBean cb;
@@ -39,8 +42,9 @@ public class AlquilerItemsBean implements Serializable {
         CliItemsRentados= new HashMap<>();
     }
 
-    public void guardarAlquiler(){
-        
+    public void guardarAlquiler() throws ExcepcionServiciosAlquiler{
+        String timeStamp = new SimpleDateFormat("yyyy MM dd").format(Calendar.getInstance().getTime());
+        sp.registrarAlquilerCliente(java.sql.Date.valueOf(timeStamp), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);        
     }
     
     public ArrayList<String[]> getListaPendientes() {
@@ -81,4 +85,15 @@ public class AlquilerItemsBean implements Serializable {
         this.id_pelicula = id_pelicula;
     }
     
+    public String getNombreCli(){
+        return cb.getNombre();
+    }
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
+    }
 }

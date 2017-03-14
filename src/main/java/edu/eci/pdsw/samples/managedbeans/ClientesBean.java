@@ -9,6 +9,7 @@ import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -38,7 +39,11 @@ public class ClientesBean implements Serializable {
     }
     
     
-    public List<Cliente> getListaClientes() {
+    public List<Cliente> getListaClientes() throws ExcepcionServiciosAlquiler {
+        listaClientes = sp.consultarClientes();
+        clean();
+        Collections.reverse(listaClientes);
+        
         return listaClientes;
     }
 
@@ -53,6 +58,9 @@ public class ClientesBean implements Serializable {
     }
 
     public void setClienteSeleccionado(Cliente clienteSeleccionado) {
+        boolean ccc=false;
+        if(clienteSeleccionado != null)ccc=true;
+        System.out.println(ccc);
         this.clienteSeleccionado = clienteSeleccionado;
     }
 
@@ -96,12 +104,20 @@ public class ClientesBean implements Serializable {
         this.email = email;
     }
     
-    
-    
-    
     public void registrarCliente() throws ExcepcionServiciosAlquiler {
         Cliente cliente = new Cliente(nombre, documento, telefono, direccion, email);
-        sp.registrarCliente(cliente);
+        sp.registrarCliente(cliente);       
+        clean();
+        
+    }
+    
+    
+    private void clean(){
+        this.nombre=null;
+        this.documento= 0;
+        this.telefono=null;
+        this.direccion=null;
+        this.email=null;
     }
     
 

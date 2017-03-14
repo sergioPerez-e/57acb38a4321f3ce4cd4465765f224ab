@@ -8,11 +8,12 @@
         <h:form>
             <h:commandButton action = "RegistroClientes" value = "Regresar" />
         </h:form>
-        <h1>Bienvenido cliente....</h1><br/><br/>
+        <h1>Bienvenido <h:outputText value="#{AlquilerItems.getNombreCli()}" />.</h1><br/><br/>
         <hr/>
         <h:form id="formulario_enviar">
             Ingrese por favor la película que desea alquilar<br/><br/>
             <p:inputText id="id_pelicula" value="#{AlquilerItems.id_pelicula}" ></p:inputText><br/>
+            <p:inputText id="dias" value="#{AlquilerItems.dias}" ></p:inputText><br/>
             <p:commandButton value="enviar numero" onclick="#{formulario_enviar.guardarAlquiler()}" update="formulario_enviar"></p:commandButton><br/><br/>
         </h:form>
         <hr/>
