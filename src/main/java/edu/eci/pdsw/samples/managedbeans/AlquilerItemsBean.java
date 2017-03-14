@@ -26,29 +26,31 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class AlquilerItemsBean implements Serializable {
 
-    ServiciosAlquiler sp;
-    private Map<Integer,ItemRentado> ItemsRentados;
+    ServiciosAlquiler sp = ServiciosAlquiler.getInstance();
+    private Map<Integer,Map<Integer,ItemRentado>> CliItemsRentados;//idCliente -> idPeli -> ItemRentado
     private ArrayList<String[]> listaPendientes;
+    private int id_pelicula;
     
     @ManagedProperty(value = "#{ClientesBen}")
     private ClientesBean cb;
 
     public AlquilerItemsBean() {
-        sp = ServiciosAlquiler.getInstance();
-        ItemsRentados= new HashMap<>();
+        id_pelicula=-1;
+        CliItemsRentados= new HashMap<>();
     }
 
+    public void guardarAlquiler(){
+        
+    }
+    
     public ArrayList<String[]> getListaPendientes() {
         ItemRentado itemTMP=null;
         LocalDate fechaInicial=null;
         LocalDate fechaEntrega=null;
         long diasRestantes=0;
+        
         listaPendientes=new ArrayList<String[]>();
-        for(int i=0;i<listaPendientes.size();i++){
-            /*
-        this.fechainiciorenta = fechainiciorenta;
-        this.fechafinrenta = fechafinrenta;
-            */
+        for(int i=0;i<ItemsRentados.size();i++){
             itemTMP=ItemsRentados.get(i);
             
             fechaInicial=itemTMP.getFechainiciorenta().toLocalDate();
@@ -68,4 +70,13 @@ public class AlquilerItemsBean implements Serializable {
     public void setCb(ClientesBean cb) {
         this.cb = cb;
     }
+
+    public int getId_pelicula() {
+        return id_pelicula;
+    }
+
+    public void setId_pelicula(int id_pelicula) {
+        this.id_pelicula = id_pelicula;
+    }
+    
 }
