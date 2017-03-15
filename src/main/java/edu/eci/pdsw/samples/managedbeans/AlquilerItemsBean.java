@@ -9,15 +9,12 @@ import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -42,8 +39,8 @@ public class AlquilerItemsBean implements Serializable {
     }
 
     public void guardarAlquiler() throws ExcepcionServiciosAlquiler{
-        String timeStamp = new SimpleDateFormat("yyyy MM dd").format(Calendar.getInstance().getTime());
-        sp.registrarAlquilerCliente(java.sql.Date.valueOf(timeStamp), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);
+        sp.registrarAlquilerCliente((java.sql.Date) Calendar.getInstance().getTime(), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);
+        System.out.println("se guarda");
     }
     
     public ArrayList<String[]> getListaPendientes() throws ExcepcionServiciosAlquiler {
@@ -61,7 +58,7 @@ public class AlquilerItemsBean implements Serializable {
             fechaEntrega=itemTMP.getFechafinrenta().toLocalDate();
             diasRestantes=ChronoUnit.DAYS.between(fechaInicial, fechaEntrega);
             
-            String[] tmp={itemTMP.getItem().getNombre(),Integer.toString((int) diasRestantes),Integer.toString((int) sp.consultarMultaAlquiler(itemTMP.getItem().getId(),(Date) Calendar.getInstance().getTime()))};
+            String[] tmp={itemTMP.getItem().getNombre(),Integer.toString((int) diasRestantes),Integer.toString((int) sp.consultarMultaAlquiler(itemTMP.getItem().getId(),(java.sql.Date) Calendar.getInstance().getTime()))};
             listaPendientes.add(tmp);
         }
         return listaPendientes;

@@ -14,7 +14,7 @@
             Ingrese por favor la película que desea alquilar<br/><br/>
             id Pelicula:<p:inputText id="id_pelicula" value="#{AlquilerItems.id_pelicula}" ></p:inputText><br/>
             Días:<p:inputText id="dias" value="#{AlquilerItems.dias}" ></p:inputText><br/>
-            <p:commandButton value="enviar numero" onclick="#{formulario_enviar.guardarAlquiler()}" update="formulario_enviar"></p:commandButton><br/><br/>
+            <p:commandButton value="enviar numero" onclick="#{AlquilerItems.guardarAlquiler()}" update="formulario_enviar"></p:commandButton><br/><br/>
         </h:form>
         <hr/>
         No olvide revisar su listado de películas pendientes<br/><br/>
