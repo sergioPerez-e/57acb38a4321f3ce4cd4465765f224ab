@@ -16,6 +16,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -30,7 +31,6 @@ import javax.faces.bean.SessionScoped;
 public class AlquilerItemsBean implements Serializable {
 
     ServiciosAlquiler sp = ServiciosAlquiler.getInstance();
-    private Map<Integer,Map<Integer,ItemRentado>> CliItemsRentados;//idCliente -> idPeli -> ItemRentado
     private ArrayList<String[]> listaPendientes;
     private int id_pelicula;
     private int dias;
@@ -39,13 +39,11 @@ public class AlquilerItemsBean implements Serializable {
     private ClientesBean cb;
 
     public AlquilerItemsBean() {
-        id_pelicula=-1;
-        CliItemsRentados= new HashMap<>();
     }
 
     public void guardarAlquiler() throws ExcepcionServiciosAlquiler{
         String timeStamp = new SimpleDateFormat("yyyy MM dd").format(Calendar.getInstance().getTime());
-        sp.registrarAlquilerCliente(java.sql.Date.valueOf(timeStamp), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);        
+        sp.registrarAlquilerCliente(java.sql.Date.valueOf(timeStamp), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);
     }
     
     public ArrayList<String[]> getListaPendientes() throws ExcepcionServiciosAlquiler {
@@ -53,8 +51,7 @@ public class AlquilerItemsBean implements Serializable {
         LocalDate fechaInicial=null;
         LocalDate fechaEntrega=null;
         long diasRestantes=0;
-        Map<Integer,ItemRentado> ItemsRentados= new HashMap<>();
-        if(CliItemsRentados.containsKey(cb.getClienteSeleccionado()))ItemsRentados= CliItemsRentados.get(cb.getClienteSeleccionado());
+        List<ItemRentado> ItemsRentados= sp.consultarItemsCliente(cb.getClienteSeleccionado().getDocumento());
         
         listaPendientes=new ArrayList<String[]>();
         for(int i=0;i<ItemsRentados.size();i++){
@@ -87,7 +84,7 @@ public class AlquilerItemsBean implements Serializable {
     }
     
     public String getNombreCli(){
-        return cb.getNombre();
+        return cb.getClienteSeleccionado().getNombre();
     }
 
     public int getDias() {
