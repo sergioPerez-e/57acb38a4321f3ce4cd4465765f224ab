@@ -41,7 +41,7 @@ public class AlquilerItemsBean implements Serializable {
     }
 
     public void guardarAlquiler() throws ExcepcionServiciosAlquiler{
-        if(id_pelicula>0)sp.registrarAlquilerCliente(new java.sql.Date(Calendar.getInstance().getTime().getTime()), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);
+        if(id_pelicula>0)sp.registrarAlquilerCliente(new java.sql.Date(Calendar.getInstance().getTime().getTime()), cb.getClienteSeleccionado().getDocumento(), sp.consultarItem(id_pelicula), dias);
     }
     
     public ArrayList<String[]> getListaPendientes() throws ExcepcionServiciosAlquiler {
@@ -59,7 +59,7 @@ public class AlquilerItemsBean implements Serializable {
             fechaEntrega=itemTMP.getFechafinrenta().toLocalDate();
             diasRestantes=ChronoUnit.DAYS.between(fechaInicial, fechaEntrega);
             
-            String[] tmp={itemTMP.getItem().getNombre(),Integer.toString((int) diasRestantes),Integer.toString((int) sp.consultarMultaAlquiler(itemTMP.getItem().getId(),(java.sql.Date) Calendar.getInstance().getTime()))};
+            String[] tmp={itemTMP.getItem().getNombre(),Integer.toString((int) diasRestantes),Integer.toString((int) sp.consultarMultaAlquiler(itemTMP.getItem().getId(),new java.sql.Date(Calendar.getInstance().getTime().getTime())))};
             listaPendientes.add(tmp);
         }
         return listaPendientes;
