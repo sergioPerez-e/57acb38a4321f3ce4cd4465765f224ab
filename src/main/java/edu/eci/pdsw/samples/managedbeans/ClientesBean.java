@@ -16,7 +16,7 @@ import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author ----
+ * @author AlvaradoPerez
  */
 @ManagedBean(name = "ClientesBen")
 @SessionScoped
@@ -30,27 +30,30 @@ public class ClientesBean implements Serializable {
     private String telefono;
     private String direccion;
     private String email;
+    private boolean reverse;
     
 
     
     public ClientesBean() throws ExcepcionServiciosAlquiler {
         listaClientes = sp.consultarClientes();
         clienteSeleccionado = null;
+        reverse = false;
     }
     
     
     public List<Cliente> getListaClientes() throws ExcepcionServiciosAlquiler {
+        
         listaClientes = sp.consultarClientes();   
         List<Cliente> lista = listaClientes;
-        //Collections.reverse(lista);        
-        return listaClientes;
+        if(!reverse && lista.size()>1 ) {
+            reverse=true;
+            Collections.reverse(lista);        
+        }
+        
+        return lista;
     }
 
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
-    
-    
+     
 
     public Cliente getClienteSeleccionado() {
         return clienteSeleccionado;
