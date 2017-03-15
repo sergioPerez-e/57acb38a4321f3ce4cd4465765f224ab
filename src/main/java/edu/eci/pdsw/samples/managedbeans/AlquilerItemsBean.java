@@ -5,6 +5,7 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
@@ -35,12 +36,12 @@ public class AlquilerItemsBean implements Serializable {
     @ManagedProperty(value = "#{ClientesBen}")
     private ClientesBean cb;
 
-    public AlquilerItemsBean() {
+    public AlquilerItemsBean() throws ExcepcionServiciosAlquiler {
+        sp.registrarItem(new Item(sp.consultarTipoItem(1), 44, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion"));
     }
 
     public void guardarAlquiler() throws ExcepcionServiciosAlquiler{
-        sp.registrarAlquilerCliente((java.sql.Date) Calendar.getInstance().getTime(), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);
-        System.out.println("se guarda");
+        if(id_pelicula>0)sp.registrarAlquilerCliente(new java.sql.Date(Calendar.getInstance().getTime().getTime()), cb.getDocumento(), sp.consultarItem(id_pelicula), dias);
     }
     
     public ArrayList<String[]> getListaPendientes() throws ExcepcionServiciosAlquiler {
