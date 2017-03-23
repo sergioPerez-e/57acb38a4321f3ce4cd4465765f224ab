@@ -6,7 +6,7 @@ deployment:
   staging:
     branch: master
     heroku: 
-      appname: pdsw-
+      appname: videotiendapdsw
 
 test:
   post:
