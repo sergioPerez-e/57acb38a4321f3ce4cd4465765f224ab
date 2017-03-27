@@ -6,4 +6,4 @@ deployment:
   staging:
     branch: master
     heroku: 
-      appname: videotiendapdsw
+	appname: videotiendaheroku
