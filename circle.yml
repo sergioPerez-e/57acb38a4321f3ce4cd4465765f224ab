@@ -6,4 +6,4 @@ deployment:
   staging:
     branch: master
     heroku: 
-	appname: videotiendaheroku
+	appname: alvaradoperez-app
