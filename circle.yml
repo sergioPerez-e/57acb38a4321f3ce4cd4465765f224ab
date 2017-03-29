@@ -6,4 +6,4 @@ deployment:
   staging:
     branch: master
     heroku: 
-	appname: alvaradoperez-app
+	appname: alvaradoperezapp2017
